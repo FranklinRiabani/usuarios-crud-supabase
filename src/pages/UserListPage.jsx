@@ -4,7 +4,7 @@ import UserList from "../components/UserList";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+  import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 const UserListPage = () => {
     const [usuarios,setUsuarios] = useState([])
