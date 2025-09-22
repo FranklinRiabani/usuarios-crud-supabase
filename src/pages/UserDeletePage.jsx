@@ -1,13 +1,11 @@
-import { useParams,useNavigate } from "react-router-dom";
-import UserForm from "../components/UserForm";
+import {useParams, useNavigate} from 'react-router-dom';
 import supabase from '../supabase/supabaseClient';
 import { useEffect, useState } from "react";
 
-const EditUserPage = () => {
+const UserDeletePage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [usuario,setUsuario] = useState(null);
-
 
     useEffect(()=>{
         getUser();
@@ -26,10 +24,11 @@ const EditUserPage = () => {
         console.log(data);
         setUsuario(data);
     }
-    const updateUser = async(userData) => {
+
+    const deleteUser = async() => {
         const {data,error} = await supabase
                                     .from("usuarios")
-                                    .update(userData)
+                                    .delete()
                                     .eq("id",id);
         if(error){
             console.error(error);
@@ -37,21 +36,21 @@ const EditUserPage = () => {
         }
         return data;
     }
-    const handleSubmit = (userData) => {  
-        console.log('Updating user:', userData);
-        updateUser(userData);
+
+    const handleDelete = () => {
+        console.log('Deleting user with id:', id);
+        deleteUser();
         navigate('/users');
     };
 
     return (
         <div>
-            <h2>Edit User</h2>
+            <h2>Delete User</h2>
             {usuario ? (
-                <UserForm 
-                    onSubmit={handleSubmit} 
-                    editingUser={usuario}
-                    isEditing={true}
-                />
+                <div>
+                    <p>Are you sure you want to delete the user: <strong>{usuario.nombre}</strong>?</p>
+                    <button onClick={handleDelete}>Yes, Delete</button>
+                </div>
             ) : (
                 <p>Loading user data...</p>
             )}
@@ -59,4 +58,4 @@ const EditUserPage = () => {
     );
 };
 
-export default EditUserPage;
+export default UserDeletePage;  

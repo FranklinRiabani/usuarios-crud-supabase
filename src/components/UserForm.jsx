@@ -3,11 +3,11 @@ import {useNavigate} from 'react-router-dom';
 
 const UserForm =({onSubmit,editingUser,isEditing=false})=>{
     const [formData,setFormData]=useState({
-        nombre:'',
-        email:'',
-        username:'',
-        password:'',
-        edad:''
+        nombre:editingUser.nombre || '',
+        email:editingUser.email || '',
+        username:editingUser.username || '',
+        password:editingUser.password || '',
+        edad:editingUser.edad || ''
     });
     const navigate = useNavigate();
 
@@ -18,10 +18,18 @@ const UserForm =({onSubmit,editingUser,isEditing=false})=>{
     const handleChange=(e)=>{
         const {name,value}=e.target;
         setFormData({...formData,[name]:value});
-        console.log(formData);
+        //console.log(formData);
     }
     const handleSubmit=(e)=>{
-
+        e.preventDefault();
+        const dataToSubmit={...formData};
+        if(isEditing){
+            dataToSubmit.id=editingUser.id;
+        }
+        if(dataToSubmit.edad){
+            dataToSubmit.edad=parseInt(dataToSubmit.edad,10);
+        }
+        onSubmit(dataToSubmit);
     }   
     const handleCancel=()=>{
         navigate('/users');

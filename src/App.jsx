@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import UserListPage from "./pages/UserListPage";
 import CreateUserPage from "./pages/CreateUserPage";
 import EditUserPage from "./pages/EditUserPage";
-import UserDetailsPage from "./pages/UserDetailsPage";
+import UserDeletePage from "./pages/UserDeletePage";
 import './App.css'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="users" element={<UserListPage/>}/>
         <Route path="users/create" element={<CreateUserPage/>}/>
         <Route path="users/edit/:id" element={<EditUserPage/>}/>
-        <Route path="users/:id" element={<UserDetailsPage/>}/>
+        <Route path="users/delete/:id" element={<UserDeletePage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

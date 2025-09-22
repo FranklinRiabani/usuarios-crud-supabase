@@ -11,7 +11,7 @@ const UserItem = ({ usuario, onDelete }) => {
             </div>
             <div className="user-actions">
                 <Link to={`/users/edit/${usuario.id}`} className="btn btn-secondary">Editar</Link>
-                <button onClick={() => onDelete(usuario.id)} className="btn btn-danger">Eliminar</button>
+                <Link to={`/users/delete/${usuario.id}`} className="btn btn-danger">Eliminar</Link>
             </div>
         </div>
     );

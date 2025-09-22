@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import supabase from '../supabase/supabaseClient';
 import UserList from "../components/UserList";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 const UserListPage = () => {
     const [usuarios,setUsuarios] = useState([])
